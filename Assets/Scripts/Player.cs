@@ -30,11 +30,27 @@ public class Player : MonoBehaviour {
         Vector3 dir = Input.mousePosition - Camera.main.WorldToScreenPoint(transform.position);
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
         weaponMount.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
+        string _dir = "";
+        if(dir.x > 0) {
+            _dir = "right";
+        } else {
+            _dir = "left";
+        }
+
+        if(dir.y > 0) {
+            _dir += " - top";
+        } else {
+            _dir += " - down";
+        }
+
+        GGJ.Manager.debug.text = dir.ToString();
+        GGJ.Manager.debug.text = GGJ.Manager.debug.text + "\n" + _dir;
+
+
         #endregion
 
-
         #region Movement
-
         moveDirection.x = new Vector3(Input.GetAxis("Horizontal"), 0, 0).x;
         moveDirection.x = transform.TransformDirection(moveDirection).x;
         moveDirection.x *= moveSpeed;
@@ -54,10 +70,10 @@ public class Player : MonoBehaviour {
 
         #endregion
 
-
         #region Attacks
         if (Input.GetButtonDown("Fire1")) {
             GameObject _bullet = Instantiate(currentBullet, weaponPivot.position, weaponPivot.rotation) as GameObject;
+            _bullet.transform.SetParent(GGJ.Manager.transform);
             Bullet _bulletScript = _bullet.GetComponent<Bullet>();
             _bulletScript.rigidBody.AddForce(_bullet.transform.forward * _bulletScript.fireSpeed);
             GGJ.Manager.debug.text = (Vector3.forward * _bulletScript.fireSpeed).ToString();
