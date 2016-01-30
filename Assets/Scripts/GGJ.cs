@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class GGJ : MonoBehaviour {
 
@@ -21,12 +22,20 @@ public class GGJ : MonoBehaviour {
 
 
     public Camera mainCam;
+    public string menuScene;
     public GameObject bulletSimple;
     public GameObject bulletFire;
-
-
     public Text debug;
 
+    void Awake() {
+        DontDestroyOnLoad(this);
+    }
 
+    void Start() {
+        SceneManager.LoadScene(menuScene, LoadSceneMode.Single);
+    }
 
+    void OnLevelWasLoaded() {
+        mainCam = Camera.main;
+    }
 }
