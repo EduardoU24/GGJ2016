@@ -20,5 +20,13 @@ public class GGJ : MonoBehaviour {
     }
 
 
+    public Camera mainCam;
+    public GameObject bulletSimple;
+    public GameObject bulletFire;
+
+
+    public Text debug;
+
+
 
 }
