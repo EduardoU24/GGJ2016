@@ -11,6 +11,8 @@ public class Player : MonoBehaviour {
     public int currentJumps = 0;
     public Vector3 moveDirection = Vector3.zero;
     public CharacterController controller;
+    public Transform weaponMount;
+    public Transform weaponPivot;
 
     void Start() {
         controller = GetComponent<CharacterController>();
